@@ -1,23 +1,20 @@
-import React from 'react'
-import logo from '../../assets/logo.svg'
-import './Home.css'
+import classNames from 'classnames'
+import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import './Home.scss'
 
 const Home = () => {
     return (
-        <div className="Home">
-            <header className="Home-header">
-                <img src={logo} className="Home-logo" alt="logo" />
+        <div className={classNames('Home')}>
+            <header>
+                <p>50/50</p>
                 <p>
-                    Edit <code>Home.tsx</code> and save to reload.
+                    You are on the homepage, please use the link below to create
+                    a new 50/50
                 </p>
-                <a
-                    className="Home-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
+                <Button>
+                    <Link to="/fifty-fifty">Create new fifty/fifty</Link>
+                </Button>
             </header>
         </div>
     )
