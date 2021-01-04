@@ -2,11 +2,13 @@ import classNames from 'classnames'
 import { useFormik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
+import { IMAGES } from '../../common/common.const'
 
 const AddFiftyFifty = () => {
     const formik = useFormik({
         initialValues: {
             title: 'Who is the sexiest ?',
+            isCorrect: IMAGES.FIRST,
             firstUrl:
                 'https://st1.photogallery.ind.sh/wp-content/uploads/indiacom/sunny-leone-poses-for-a-red-hot-picture-201610-1498306333.jpg',
             secondUrl:
@@ -16,6 +18,7 @@ const AddFiftyFifty = () => {
             title: Yup.string()
                 .max(150, 'Must be 150 characters or less')
                 .required('Required'),
+            isCorrect: Yup.string().required(),
             firstUrl: Yup.string()
                 .max(200, 'Must be 200 characters or less')
                 .required('Required'),
@@ -29,17 +32,16 @@ const AddFiftyFifty = () => {
     })
 
     const styleImg = {
-        width: "200px",
-        height: "auto"
-    };
+        width: '100%',
+        height: 'auto',
+    }
 
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
             <button type="submit" className="btn btn-primary">
                 Submit
             </button>
             <div>Please create a new fifty fifty</div>
-
             <div
                 className={classNames({
                     'form-group': true,
@@ -57,6 +59,31 @@ const AddFiftyFifty = () => {
                     {...formik.getFieldProps('title')}
                 />
             </div>
+            <div className="form-group">
+                <div className="form-check">
+                    <input
+                        type="radio"
+                        className="form-check-input"
+                        id="is-correct"
+                        {...formik.getFieldProps('isCorrect')}
+                        checked={formik.values.isCorrect === IMAGES.FIRST}
+                        value={IMAGES.FIRST}
+                    />
+                    <label className="form-check-label">First image</label>
+                </div>
+                <div className="form-check mb-3">
+                    <input
+                        type="radio"
+                        className="form-check-input"
+                        id="is-correct"
+                        {...formik.getFieldProps('isCorrect')}
+                        value={IMAGES.SECOND}
+                        checked={formik.values.isCorrect === IMAGES.SECOND}
+                    />
+                    <label className="form-check-label">Second Image</label>
+                </div>
+            </div>
+
             <div className="row">
                 <div
                     className={classNames({
@@ -73,6 +100,11 @@ const AddFiftyFifty = () => {
                         })}
                         placeholder="Please add a valid url"
                         {...formik.getFieldProps('firstUrl')}
+                    />
+                    <img
+                        style={styleImg}
+                        src={formik.values.firstUrl}
+                        alt="first image"
                     />
                 </div>
                 <div
@@ -91,10 +123,13 @@ const AddFiftyFifty = () => {
                         placeholder="Please add a valid url"
                         {...formik.getFieldProps('secondUrl')}
                     />
+                    <img
+                        style={styleImg}
+                        src={formik.values.secondUrl}
+                        alt="second image"
+                    />
                 </div>
             </div>
-            <img style={styleImg} src={formik.values.firstUrl} alt="first image" />
-            <img style={styleImg} src={formik.values.secondUrl} alt="second image" />
         </form>
     )
 }
