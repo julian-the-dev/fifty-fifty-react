@@ -59,30 +59,6 @@ const AddFiftyFifty = () => {
                     {...formik.getFieldProps('title')}
                 />
             </div>
-            <div className="form-group">
-                <div className="form-check">
-                    <input
-                        type="radio"
-                        className="form-check-input"
-                        id="is-correct"
-                        {...formik.getFieldProps('isCorrect')}
-                        checked={formik.values.isCorrect === IMAGES.FIRST}
-                        value={IMAGES.FIRST}
-                    />
-                    <label className="form-check-label">First image</label>
-                </div>
-                <div className="form-check mb-3">
-                    <input
-                        type="radio"
-                        className="form-check-input"
-                        id="is-correct"
-                        {...formik.getFieldProps('isCorrect')}
-                        value={IMAGES.SECOND}
-                        checked={formik.values.isCorrect === IMAGES.SECOND}
-                    />
-                    <label className="form-check-label">Second Image</label>
-                </div>
-            </div>
 
             <div className="row">
                 <div
@@ -91,6 +67,17 @@ const AddFiftyFifty = () => {
                         'form-group': true,
                     })}
                 >
+                    <div className="form-check">
+                        <input
+                            type="radio"
+                            className="form-check-input"
+                            id="is-correct"
+                            {...formik.getFieldProps('isCorrect')}
+                            checked={formik.values.isCorrect === IMAGES.FIRST}
+                            value={IMAGES.FIRST}
+                        />
+                        <label className="form-check-label">First image</label>
+                    </div>
                     <input
                         id="firstUrl"
                         type="text"
@@ -113,6 +100,17 @@ const AddFiftyFifty = () => {
                         'form-group': true,
                     })}
                 >
+                    <div className="form-check">
+                        <input
+                            type="radio"
+                            className="form-check-input"
+                            id="is-correct"
+                            {...formik.getFieldProps('isCorrect')}
+                            value={IMAGES.SECOND}
+                            checked={formik.values.isCorrect === IMAGES.SECOND}
+                        />
+                        <label className="form-check-label">Second Image</label>
+                    </div>
                     <input
                         id="secondUrl"
                         type="text"

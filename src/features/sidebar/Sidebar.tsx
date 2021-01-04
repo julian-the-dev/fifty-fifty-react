@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { selectUser } from '../user/userSlice'
+import './Sidebar.scss'
 
 const Sidebar = () => {
     const user = useSelector(selectUser)
@@ -14,7 +15,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div>
+        <div className="sidebar">
             <div> I am a side bar</div>
             <div>{userContent}</div>
         </div>

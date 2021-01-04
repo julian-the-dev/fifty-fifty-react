@@ -9,13 +9,13 @@ import './App.scss'
 const App = () => {
     return (
         <Router>
-            <div className={classNames('w-100')}>
+            <div>
                 {/*Sidebar*/}
-                <div className={classNames('w-10', 'd-inline-block')}>
+                <div className={classNames('App-sidebar')}>
                     <Sidebar />
                 </div>
                 {/*Content */}
-                <div className={classNames('w-90', 'd-inline-block')}>
+                <div className={classNames('d-inline-block', 'App-container')}>
                     <div className={classNames('container-fluid', 'App-body')}>
                         <Switch>
                             <Route path="/fifty-fifty">
