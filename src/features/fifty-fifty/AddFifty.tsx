@@ -1,10 +1,13 @@
 import classNames from 'classnames'
 import { useFormik } from 'formik'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import * as Yup from 'yup'
 import { IMAGES } from '../../common/common.const'
+import { addFiftyFifty } from './FiftyFiftySlice'
 
 const AddFiftyFifty = () => {
+    const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
             title: 'Who is the sexiest ?',
@@ -27,7 +30,9 @@ const AddFiftyFifty = () => {
                 .required('Required'),
         }),
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2))
+            dispatch(addFiftyFifty(values));
+            console.log(values);
+            //alert(JSON.stringify(values, null, 2))
         },
     })
 

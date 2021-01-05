@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
-import userSlice from '../../features/user/userSlice'
+import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import fiftyFiftySlice from '../../features/fifty-fifty/FiftyFiftySlice';
+import userSlice from '../../features/user/userSlice';
 
 const store = configureStore({
     reducer: {
         user: userSlice as any,
+        fiftyfiftyList: fiftyFiftySlice as any
     },
 })
 
