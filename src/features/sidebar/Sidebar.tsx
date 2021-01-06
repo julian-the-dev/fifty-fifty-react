@@ -1,11 +1,13 @@
+import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getFiftyFiftyList } from '../fifty-fifty/FiftyFiftySlice'
 import { selectUser } from '../user/userSlice'
 import './Sidebar.scss'
 
 const Sidebar = () => {
     const user = useSelector(selectUser)
-    const fiftyFiftyList = useSelector(getFiftyFiftyList);
+    const fiftyFiftyList = useSelector(getFiftyFiftyList)
     let userContent = getUserContent()
 
     function getUserContent() {
@@ -20,7 +22,9 @@ const Sidebar = () => {
         <div className="sidebar">
             <div> I am a side bar</div>
             <div>{userContent}</div>
-            <div>Number of items: {fiftyFiftyList.length}</div>
+            <div>
+                <Link to="/fifty-fifty/list">Number of items: {fiftyFiftyList.length}</Link>
+            </div>
         </div>
     )
 }

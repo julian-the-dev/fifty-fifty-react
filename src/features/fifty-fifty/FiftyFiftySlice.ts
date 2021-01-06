@@ -2,11 +2,13 @@ import {
     createAsyncThunk,
     createEntityAdapter,
     createSlice,
+    EntityAdapter,
     nanoid,
 } from '@reduxjs/toolkit'
 import { LOADING } from './../../common/common.const'
+import { FiftyFifty } from './FiftyFifty'
 
-const adapter = createEntityAdapter()
+const adapter: EntityAdapter<FiftyFifty> = createEntityAdapter()
 
 const initialState = adapter.getInitialState({
     status: LOADING.idle,

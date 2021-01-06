@@ -13,7 +13,7 @@ const Home = () => {
                     a new 50/50
                 </p>
                 <Button>
-                    <Link to="/fifty-fifty">Create new fifty/fifty</Link>
+                    <Link to="/fifty-fifty" style={{color: "white"}}>Create new fifty/fifty</Link>
                 </Button>
             </header>
         </div>

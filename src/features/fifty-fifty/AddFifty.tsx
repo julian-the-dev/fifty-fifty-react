@@ -1,13 +1,14 @@
 import classNames from 'classnames'
 import { useFormik } from 'formik'
-import React from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup'
 import { IMAGES } from '../../common/common.const'
 import { addFiftyFifty } from './FiftyFiftySlice'
 
 const AddFiftyFifty = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const formik = useFormik({
         initialValues: {
             title: 'Who is the sexiest ?',
@@ -29,10 +30,9 @@ const AddFiftyFifty = () => {
                 .max(200, 'Must be 200 characters or less')
                 .required('Required'),
         }),
-        onSubmit: (values) => {
-            dispatch(addFiftyFifty(values));
-            console.log(values);
-            //alert(JSON.stringify(values, null, 2))
+        onSubmit: async (values) => {
+            const action = await dispatch(addFiftyFifty(values));
+            history.push('/fifty-fifty/' + action.payload.id);
         },
     })
 
@@ -84,7 +84,7 @@ const AddFiftyFifty = () => {
                         <label className="form-check-label">First image</label>
                     </div>
                     <input
-                        id="firstUrl"
+                        id="first url"
                         type="text"
                         className={classNames({
                             'form-control': true,
@@ -117,7 +117,7 @@ const AddFiftyFifty = () => {
                         <label className="form-check-label">Second Image</label>
                     </div>
                     <input
-                        id="secondUrl"
+                        id="second url"
                         type="text"
                         className={classNames({
                             'form-control': true,
