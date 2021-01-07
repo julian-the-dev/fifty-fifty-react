@@ -16,14 +16,26 @@ const initialState = adapter.getInitialState({
 })
 
 export const addFiftyFifty: any = createAsyncThunk(
-    'fiftyfifty/addNewFiftyFifty',
+    'fiftyfifty/addFiftyFifty',
     // The payload creator receives the partial `{title, content, user}` object
     async (newFiftyFifty: any) => {
-        console.log('Do I pass here ?', newFiftyFifty);
+        console.log('Add Fifty', newFiftyFifty);
         // We send the initial data to the fake API server
         //const response = await client.post("/fakeApi/posts", { post: initialPost });
         // The response includes the complete post object, including unique ID
         return {id: nanoid(), ...newFiftyFifty}
+    }
+)
+
+export const updateFiftyFifty: any = createAsyncThunk(
+    'fiftyfifty/updateFiftyFifty',
+    // The payload creator receives the partial `{title, content, user}` object
+    async (fiftyFiftyToEdit: any) => {
+        console.log('Edit Fifty', fiftyFiftyToEdit);
+        // We send the initial data to the fake API server
+        //const response = await client.post("/fakeApi/posts", { post: initialPost });
+        // The response includes the complete post object, including unique ID
+        return fiftyFiftyToEdit;
     }
 )
 
@@ -37,6 +49,7 @@ const fiftyFiftySlice = createSlice({
             state.error = action.error.message
         },
         [addFiftyFifty.fulfilled]: adapter.addOne,
+        [updateFiftyFifty.fulfilled]: adapter.upsertOne
     },
 })
 

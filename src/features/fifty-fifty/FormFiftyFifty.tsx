@@ -1,38 +1,19 @@
 import classNames from 'classnames'
 import { useFormik } from 'formik'
-import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import * as Yup from 'yup'
 import { IMAGES } from '../../common/common.const'
-import { addFiftyFifty } from './FiftyFiftySlice'
+import {
+    defaultFiftyFifty,
+    validationSchemaFiftyFifty,
+} from './FiftyFifty.const'
 
-const AddFiftyFifty = () => {
-    const dispatch = useDispatch();
-    const history = useHistory();
+const FormFiftyFifty = (props: any) => {
+    const isEdit = !!props.fiftyFifty
+    const init = props.fiftyFifty ?? { ...defaultFiftyFifty }
     const formik = useFormik({
-        initialValues: {
-            title: 'Who is the sexiest ?',
-            isCorrect: IMAGES.FIRST,
-            firstUrl:
-                'https://st1.photogallery.ind.sh/wp-content/uploads/indiacom/sunny-leone-poses-for-a-red-hot-picture-201610-1498306333.jpg',
-            secondUrl:
-                'https://art.ngfiles.com/images/749000/749479_kumiko11_sexy-girl.jpg?f1545350449',
-        },
-        validationSchema: Yup.object({
-            title: Yup.string()
-                .max(150, 'Must be 150 characters or less')
-                .required('Required'),
-            isCorrect: Yup.string().required(),
-            firstUrl: Yup.string()
-                .max(200, 'Must be 200 characters or less')
-                .required('Required'),
-            secondUrl: Yup.string()
-                .max(200, 'Must be 200 characters or less')
-                .required('Required'),
-        }),
+        initialValues: init,
+        validationSchema: validationSchemaFiftyFifty,
         onSubmit: async (values) => {
-            const action = await dispatch(addFiftyFifty(values));
-            history.push('/fifty-fifty/' + action.payload.id);
+            props.submit(values)
         },
     })
 
@@ -44,9 +25,13 @@ const AddFiftyFifty = () => {
     return (
         <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
             <button type="submit" className="btn btn-primary">
-                Submit
+                {isEdit ? 'Edit' : 'Create'}
             </button>
-            <div>Please create a new fifty fifty</div>
+            <div>
+                {isEdit
+                    ? 'Please edit this fifty fifty'
+                    : 'Please create a new fifty fifty'}
+            </div>
             <div
                 className={classNames({
                     'form-group': true,
@@ -137,4 +122,4 @@ const AddFiftyFifty = () => {
     )
 }
 
-export default AddFiftyFifty
+export default FormFiftyFifty

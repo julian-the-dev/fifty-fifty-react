@@ -23,7 +23,9 @@ const Sidebar = () => {
             <div> I am a side bar</div>
             <div>{userContent}</div>
             <div>
-                <Link to="/fifty-fifty/list">Number of items: {fiftyFiftyList.length}</Link>
+                <Link to="/fifty-fifty/list">
+                    Number of items: {fiftyFiftyList.length}
+                </Link>
             </div>
         </div>
     )
