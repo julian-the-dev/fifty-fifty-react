@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getFiftyFiftyList } from '../fifty-fifty/FiftyFiftySlice'
@@ -21,6 +22,11 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div> I am a side bar</div>
+            <Button>
+                <Link to="/fifty-fifty/login" style={{ color: 'white' }}>
+                    Login
+                </Link>
+            </Button>
             <div>{userContent}</div>
             <div>
                 <Link to="/fifty-fifty/list">

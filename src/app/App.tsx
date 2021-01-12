@@ -6,6 +6,8 @@ import DisplayFiftyFifty from '../features/fifty-fifty/DisplayFiftyFifty'
 import EditFiftyFifty from '../features/fifty-fifty/EditFiftyFifty'
 import FiftyFiftyList from '../features/fifty-fifty/ListFiftyFifty'
 import Home from '../features/home/Home'
+import Login from '../features/login/Login'
+import Signup from '../features/login/Signup'
 import Sidebar from '../features/sidebar/Sidebar'
 import './App.scss'
 
@@ -21,6 +23,12 @@ const App = () => {
                 <div className={classNames('d-inline-block', 'App-container')}>
                     <div className={classNames('container-fluid', 'App-body')}>
                         <Switch>
+                            <Route path="/fifty-fifty/login">
+                                <Login />
+                            </Route>
+                            <Route path="/fifty-fifty/signup">
+                                <Signup />
+                            </Route>
                             <Route path="/fifty-fifty/edit/:id">
                                 <EditFiftyFifty />
                             </Route>
