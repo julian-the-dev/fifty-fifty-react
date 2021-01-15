@@ -53,7 +53,7 @@ const FormLogin = (props: any) => {
                 {isSignup ? 'Sign up' : 'Login'}
             </button>
             {renderInput('username')}
-            {renderInput('email')}
+            {isSignup ? renderInput('email') : null}
             {renderInput('password')}
             {isSignup ? renderInput('passwordConfirmation') : null}
         </form>

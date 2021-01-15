@@ -7,7 +7,7 @@ const Signup = () => {
     const onSubmit = (values: any) => {
         axios
             .post(
-                'http://127.0.0.1:4000/signup',
+                '/signup',
                 {
                     username: values.username,
                     email: values.email,

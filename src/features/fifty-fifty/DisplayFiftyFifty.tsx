@@ -1,14 +1,17 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { IMAGES } from '../../common/common.const'
-import { getFiftyFiftyById } from './FiftyFiftySlice'
+import { FiftyFifty } from './FiftyFifty'
+import { getFiftyFiftyById, deleteFiftyFifty } from './FiftyFiftySlice'
 
 const DisplayFiftyFifty = () => {
     const { id }: any = useParams()
+    const dispatch = useDispatch()
+    const history = useHistory()
     const fiftyFifty = useSelector((state) => getFiftyFiftyById(state, id))
-    console.log('Fifty ?', fiftyFifty);
+    console.log('Fifty ?', fiftyFifty)
     const styleImg = {
         width: '100%',
         height: 'auto',
@@ -26,6 +29,11 @@ const DisplayFiftyFifty = () => {
         }
     }
 
+    const deleteFiftyFiftyE = async (fiftyFifty: FiftyFifty) => {
+        const action = await dispatch(deleteFiftyFifty(fiftyFifty))
+        history.push('/fifty-fifty/list')
+    }
+
     return (
         <div>
             <div>
@@ -36,6 +44,9 @@ const DisplayFiftyFifty = () => {
                     >
                         Edit fifty-fifty
                     </Link>
+                </Button>
+                <Button onClick={(event) => deleteFiftyFiftyE(fiftyFifty)}>
+                    Delete fifty-fifty
                 </Button>
             </div>
             <div>{fiftyFifty.title}</div>
