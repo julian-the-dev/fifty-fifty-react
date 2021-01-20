@@ -9,12 +9,14 @@ export class HttpUtils {
     }
 
     private static getPort(url: string) {
-        const isAuth = ['/login', '/token', '/logout', '/signup'].some(key => key === url);
-        return (isAuth ? 4000 : 5000);
+        const isAuth = ['/login', '/token', '/logout', '/signup'].some(
+            (key) => key === url
+        )
+        return isAuth ? 4000 : 5000
     }
 
     private static getUrl(url: string) {
-        return this.getBaseUrl() + this.getPort(url) + url;
+        return this.getBaseUrl() + this.getPort(url) + url
     }
 
     public static getAccessToken() {
@@ -36,20 +38,32 @@ export class HttpUtils {
     public static async get(url: string, jwt = false, headers?: any) {
         this.checkAccessToken(jwt)
         try {
-            return await axios.get(this.getUrl(url), this.getHeaders(jwt, headers))
+            return await axios.get(
+                this.getUrl(url),
+                this.getHeaders(jwt, headers)
+            )
         } catch (httpError) {
             await this.handleRefreshAccesToken(httpError)
-            return await axios.post(this.getUrl(url), this.getHeaders(jwt, headers))
+            return await axios.post(
+                this.getUrl(url),
+                this.getHeaders(jwt, headers)
+            )
         }
     }
 
     public static async delete(url: string, jwt = false, headers?: any) {
         this.checkAccessToken(jwt)
         try {
-            return await axios.delete(this.getUrl(url), this.getHeaders(jwt, headers))
+            return await axios.delete(
+                this.getUrl(url),
+                this.getHeaders(jwt, headers)
+            )
         } catch (httpError) {
             await this.handleRefreshAccesToken(httpError)
-            return await axios.delete(this.getUrl(url), this.getHeaders(jwt, headers))
+            return await axios.delete(
+                this.getUrl(url),
+                this.getHeaders(jwt, headers)
+            )
         }
     }
 
@@ -61,10 +75,18 @@ export class HttpUtils {
     ) {
         this.checkAccessToken(jwt)
         try {
-            return await axios.put(this.getUrl(url), data, this.getHeaders(jwt, headers))
+            return await axios.put(
+                this.getUrl(url),
+                data,
+                this.getHeaders(jwt, headers)
+            )
         } catch (httpError) {
             await this.handleRefreshAccesToken(httpError)
-            return await axios.put(this.getUrl(url), data, this.getHeaders(jwt, headers))
+            return await axios.put(
+                this.getUrl(url),
+                data,
+                this.getHeaders(jwt, headers)
+            )
         }
     }
 
@@ -76,10 +98,18 @@ export class HttpUtils {
     ) {
         this.checkAccessToken(jwt)
         try {
-            return await axios.post(this.getUrl(url), data, this.getHeaders(jwt, headers))
+            return await axios.post(
+                this.getUrl(url),
+                data,
+                this.getHeaders(jwt, headers)
+            )
         } catch (httpError) {
             await this.handleRefreshAccesToken(httpError)
-            return await axios.post(this.getUrl(url), data, this.getHeaders(jwt, headers))
+            return await axios.post(
+                this.getUrl(url),
+                data,
+                this.getHeaders(jwt, headers)
+            )
         }
     }
 
@@ -107,15 +137,23 @@ export class HttpUtils {
             error.data.message &&
             error.data.message === 'TokenExpiredError'
         ) {
-            const response = await axios.post(
-                this.getUrl('/token'),
-                { refreshToken: this.getRefreshToken() },
-                { headers: { 'Content-Type': 'application/json' } }
-            )
-            this.setAccesToken(response.data.accessToken)
-            return response
+            return this.refreshAccessToken()
         } else {
             throw error
         }
+    }
+
+    public static async refreshAccessToken() {
+        const refreshToken = this.getRefreshToken();
+        if (!refreshToken) {
+            throw new Error('no refresh Token')
+        }
+        const response = await axios.post(
+            this.getUrl('/token'),
+            { refreshToken },
+            { headers: { 'Content-Type': 'application/json' } }
+        )
+        this.setAccesToken(response.data.accessToken)
+        return response
     }
 }

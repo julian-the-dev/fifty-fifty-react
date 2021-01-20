@@ -8,6 +8,7 @@ export const defaultFiftyFifty = {
         'https://st1.photogallery.ind.sh/wp-content/uploads/indiacom/sunny-leone-poses-for-a-red-hot-picture-201610-1498306333.jpg',
     secondUrl:
         'https://art.ngfiles.com/images/749000/749479_kumiko11_sexy-girl.jpg?f1545350449',
+    user: null,
 }
 
 export const validationSchemaFiftyFifty = Yup.object({
