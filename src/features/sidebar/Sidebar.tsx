@@ -3,17 +3,33 @@ import { Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getFiftyFiftyList } from '../fifty-fifty/FiftyFiftySlice'
-import { selectUser } from '../user/userSlice'
+import { selectLightUser } from '../user/userSlice'
 import './Sidebar.scss'
 
 const Sidebar = () => {
-    const user = useSelector(selectUser)
+    const lightUser = useSelector(selectLightUser)
     const fiftyFiftyList = useSelector(getFiftyFiftyList)
+    let loginButton = renderLoginButton()
     let userContent = getUserContent()
 
+    function renderLoginButton() {
+        if (lightUser) {
+            return null
+        } else {
+            return (
+                <Button>
+                    <Link to="/fifty-fifty/login" style={{ color: 'white' }}>
+                        Login
+                    </Link>
+                </Button>
+            )
+        }
+    }
+
     function getUserContent() {
-        if (user) {
-            return <span>User found: {user.toto}</span>
+        console.log(lightUser);
+        if (lightUser) {
+            return <span>User found: {lightUser.username}</span>
         } else {
             return <span>No User found</span>
         }
@@ -22,11 +38,7 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div> I am a side bar</div>
-            <Button>
-                <Link to="/fifty-fifty/login" style={{ color: 'white' }}>
-                    Login
-                </Link>
-            </Button>
+            {loginButton}
             <div>{userContent}</div>
             <div>
                 <Link to="/fifty-fifty/list">

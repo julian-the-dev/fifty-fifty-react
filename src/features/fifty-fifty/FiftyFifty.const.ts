@@ -2,12 +2,13 @@ import { IMAGES } from '../../common/common.const'
 import * as Yup from 'yup'
 
 export const defaultFiftyFifty = {
-    title: 'Who is the sexiest ?',
+    title: 'Who is cutest puppy ?',
     isCorrect: IMAGES.FIRST,
     firstUrl:
-        'https://st1.photogallery.ind.sh/wp-content/uploads/indiacom/sunny-leone-poses-for-a-red-hot-picture-201610-1498306333.jpg',
+        'https://www.rd.com/wp-content/uploads/2019/01/shutterstock_123087826-e1548785863702.jpg?resize=768,503',
     secondUrl:
-        'https://art.ngfiles.com/images/749000/749479_kumiko11_sexy-girl.jpg?f1545350449',
+        'https://www.rd.com/wp-content/uploads/2019/01/shutterstock_610222331-e1548785987567.jpg?resize=768,519',
+    user: null,
 }
 
 export const validationSchemaFiftyFifty = Yup.object({

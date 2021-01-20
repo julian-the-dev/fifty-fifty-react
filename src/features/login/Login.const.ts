@@ -6,13 +6,7 @@ export const validationSchemaSignup = Yup.object({
         .required('Required'),
     email: Yup.string().email('Must be a valid email').required('Required'),
     password: Yup.string()
-        .required('Required')
-        .matches(
-            new RegExp(
-                '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
-            ),
-            'Password strong mandatory'
-        ),
+        .required('Required'),
     passwordConfirmation: Yup.string()
         .required('Required')
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),

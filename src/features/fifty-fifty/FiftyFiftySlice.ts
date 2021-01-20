@@ -52,7 +52,9 @@ const loadFiftyFiftyReducers = {
 export const addFiftyFifty: any = createAsyncThunk(
     'fiftyfifty/addFiftyFifty',
     // The payload creator receives the partial `{title, content, user}` object
-    async (newFiftyFifty: any) => {
+    async (newFiftyFifty: any, thunkApi) => {
+        const user = (thunkApi.getState() as any).userInfo.light;
+        newFiftyFifty.user = user.id ?? null;
         const result: any = await HttpUtils.post(
             '/api/v1/fifty-fifty/create',
             newFiftyFifty,

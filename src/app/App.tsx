@@ -12,14 +12,22 @@ import Home from '../features/home/Home'
 import Login from '../features/login/Login'
 import Signup from '../features/login/Signup'
 import Sidebar from '../features/sidebar/Sidebar'
+import { loadLightUser } from '../features/user/userSlice'
 import './App.scss'
 
 const App = () => {
-
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(loadFiftyFifty())
+       init();
     }, [useDispatch])
+
+    const init = async () => {
+        await HttpUtils.refreshAccessToken()
+        if(HttpUtils.getAccessToken()) {
+            await dispatch(loadLightUser());
+        }
+        await dispatch(loadFiftyFifty())
+    }
 
     return (
         <Router>

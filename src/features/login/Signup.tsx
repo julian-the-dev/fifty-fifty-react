@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import FormLogin from './FormLogin'
+import { HttpUtils } from '../../common/http/http.utils'
 
 const Signup = () => {
     const history = useHistory()
     const onSubmit = (values: any) => {
-        axios
+        HttpUtils
             .post(
                 '/signup',
                 {
@@ -13,6 +14,7 @@ const Signup = () => {
                     email: values.email,
                     password: values.password,
                 },
+                true,
                 {
                     headers: {
                         'Content-Type': 'application/json',
